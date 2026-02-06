@@ -17,6 +17,7 @@ struct ParticleSystem
 	float gravity = 0.1f;
 	Uint32 particleIndex = 0;
 	Uint32 count = 0;
+	Uint32 padding;
 };
 
 
@@ -64,12 +65,9 @@ Uint64 UpdateParticles(ParticleSystem* ps)
 		k = j + step;
 		l = k + step;
 		SIMD::SSE::particleUpdate(&points[i], &particles[i], friction, gravity);
-		if(j < max)
-			SIMD::SSE::particleUpdate(&points[j], &particles[j], friction, gravity);
-		if(k < max)
-			SIMD::SSE::particleUpdate(&points[k], &particles[k], friction, gravity);
-		if(l < max)
-			SIMD::SSE::particleUpdate(&points[l], &particles[l], friction, gravity);
+		SIMD::SSE::particleUpdate(&points[j], &particles[j], friction, gravity);
+		SIMD::SSE::particleUpdate(&points[k], &particles[k], friction, gravity);
+		SIMD::SSE::particleUpdate(&points[l], &particles[l], friction, gravity);
 		i = l + step;
 	}
 	return SDL_GetTicksNS() - timer;

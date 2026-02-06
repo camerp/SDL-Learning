@@ -14,7 +14,7 @@ union foo
 };
 
 #define MAX_SHAPES 128
-#define MAX_PARTICLE_SYSTEMS 1
+#define MAX_PARTICLE_SYSTEMS 10
 
 static struct SDLApp
 {
